@@ -7,5 +7,7 @@ include_directories(src)
 
 add_compile_options(-g -Wall -std=c99 -pedantic -fcommon)
 add_executable(makelink
-        src/makelink.c
-        src/makelink.h)
+        src/files.c
+        src/main.c
+        src/util.c
+        src/args.c)
