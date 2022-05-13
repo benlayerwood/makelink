@@ -1,0 +1,19 @@
+#+title: Readme
+#+author: Benjamin Schichtholz
+
+* Introduction
+The makelink-tool duplicates a file-structure with hard links for all files. This saves a lot of space, because the files only use one inode in the file system.
+It traverses the directory structure and duplicates the directories (because one can't hard link directories).
+
+* Build
+#+begin_src shell
+mkdir build
+cd build
+cmake ..
+make
+#+end_src
+
+* Execute
+#+begin_src shell
+./makelink [<src directory>] [<dest directory>]
+#+end_src
