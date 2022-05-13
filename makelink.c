@@ -1,9 +1,4 @@
 #include "makelink.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <dirent.h>
 
 int main(int argc, char *argv[]){
   char **dirs = parse_command_line_arguments(argc,argv);
@@ -12,17 +7,11 @@ int main(int argc, char *argv[]){
   FILE *filesrc;
   FILE *filedest;
 
-  char *srcdir = dirs[1];
-  char *destdir = dirs[2];
-  DIR *d = opendir(srcdir);
+  char *srcdir = concat(dirs[1],"/");
+  char *destdir = concat(dirs[2],"/");
 
-  // Open directory srcdir
-  if (d == NULL){
-    printf("ERROR:\tdirectory \"%s\" not found\n", srcdir);
-    exit(EXIT_FAILURE);
-  } else {
-    printf("Opened directory \"%s\"\n", srcdir);
-  }
+  DIR *d = check_dir(srcdir);
+  check_dir(destdir);
 
   // Read directory srcdir
   // TODO: Print message when directory is empty
@@ -51,6 +40,18 @@ int check_file(const char *filename) {
   } else {
     printf("ERROR:\tfile %s not found\n",filename);
     return 0;
+  }
+}
+
+DIR* check_dir(const char *dirname) {
+  DIR *d = opendir(dirname);
+  // Open directory srcdir
+  if (d == NULL){
+    printf("ERROR:\tdirectory \"%s\" not found\n", dirname);
+    exit(EXIT_FAILURE);
+  } else {
+    printf("Opened directory \"%s\"\n", dirname);
+    return d;
   }
 }
 
