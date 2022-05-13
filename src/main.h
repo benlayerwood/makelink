@@ -8,4 +8,6 @@
 #include "util.h"
 #include "args.h"
 
+void readDir(char *srcdir, char* destdir);
+
 #endif // MAIN_H_
